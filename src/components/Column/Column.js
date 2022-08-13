@@ -1,17 +1,17 @@
 import React from 'react'
-import Task from '../Task/Task'
+import Card from '../Card/Card'
 import './Column.scss'
+import { mapOrder } from '../../utilities/sorts'
 
-function Column() {
+function Column(props) {
+    const { column } = props
+    const cards = mapOrder(column.cards, column.cardOrder, 'id')
+
     return (
         <div className="column">
-            <header>BrainStorm</header>
-            <ul className='task-list'>
-                <Task />
-                <li className='task-item'>What you like to work on below</li>
-                <li className='task-item'>What you like to work on below</li>
-                <li className='task-item'>What you like to work on below</li>
-                <li className='task-item'>What you like to work on below</li>
+            <header>{column.title}</header>
+            <ul className='card-list'>
+                {cards.map((card, index) => <Card key={index} card={card} />)}
             </ul>
             <footer>Add another card</footer>
           </div>
